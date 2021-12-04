@@ -34,6 +34,7 @@ int main() {
             if (digit == counts[i]) filtered.push_back(remaining[j]);
         }
         if (filtered.size() == 1) {
+            cout << "test " << filtered[0] << endl;
             oxygen = binaryToDecimal(filtered[0]);
             break;
         }
@@ -49,13 +50,15 @@ int main() {
             if (digit == (counts[i] == 0 ? 1 : 0)) filtered.push_back(remaining[j]);
         }
         if (filtered.size() == 1) {
+            cout << "test " << filtered[0] << endl;
             scrubber = binaryToDecimal(filtered[0]);
-            // break;
+            break;
         }
         remaining = filtered;
     }
 
     // Get result
+    cout << oxygen << "  " << scrubber << endl;
     cout << "Life support rating: " << oxygen * scrubber << endl;
 
     return 0;

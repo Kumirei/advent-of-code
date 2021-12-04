@@ -41,3 +41,6 @@ tempCodeRunnerFile.cpp
 
 # Settings
 .vscode
+
+# JS
+node_modules

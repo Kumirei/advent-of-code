@@ -16,7 +16,7 @@ array<int, 12> mostFrequent(vector<string> data, int eq);
 
 int main() {
     // Get data
-    ifstream file("data.txt");
+    ifstream file("../data.txt");
     vector<string> data = fileToVector(file);
 
     // Get most frequent bit

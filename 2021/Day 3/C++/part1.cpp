@@ -14,7 +14,7 @@ vector<string> splitString(string s, string del = " ");
 
 int main() {
     // Get data
-    ifstream file("data.txt");
+    ifstream file("../data.txt");
     vector<string> data = fileToVector(file);
 
     // Prepare counting array

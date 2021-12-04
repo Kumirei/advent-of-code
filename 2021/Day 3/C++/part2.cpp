@@ -19,17 +19,14 @@ int main() {
     ifstream file("../data.txt");
     vector<string> data = fileToVector(file);
 
-    // Get most frequent bit
-    array<int, 12> counts = mostFrequent(data, 1);
-
     // Filter data for conditions
-    int oxygen, scrubber;
+    int oxygen, scrubber = 0;
     // Oxygen
     vector<string> remaining = data;
     for (int i = 0; i < 12; i++) {
         array<int, 12> counts = mostFrequent(remaining, 1);
         vector<string> filtered;
-        for (int j = 0; j < remaining.size(); j++) {
+        for (string::size_type j = 0; j < remaining.size(); j++) {
             int digit = remaining[j][i] - 48;
             if (digit == counts[i]) filtered.push_back(remaining[j]);
         }
@@ -42,10 +39,10 @@ int main() {
     }
     // Scrubber
     remaining = data;
-    for (int i = 0; i < 12; i++) {
+    for (string::size_type i = 0; i < 12; i++) {
         array<int, 12> counts = mostFrequent(remaining, 1);
         vector<string> filtered;
-        for (int j = 0; j < remaining.size(); j++) {
+        for (string::size_type j = 0; j < remaining.size(); j++) {
             int digit = remaining[j][i] - 48;
             if (digit == (counts[i] == 0 ? 1 : 0)) filtered.push_back(remaining[j]);
         }
@@ -68,9 +65,9 @@ int main() {
 array<int, 12> mostFrequent(vector<string> data, int eq) {
     array<int, 12> counts;
     counts.fill(0);
-    for (int i = 0; i < data.size(); i++) {
+    for (string::size_type i = 0; i < data.size(); i++) {
         string line = data[i];
-        for (int j = 0; j < line.size(); j++) {
+        for (string::size_type j = 0; j < line.size(); j++) {
             int digit = line[j] - 48;  // 48=0 and 49=1
             counts[j] += digit > 0 ? 1 : -1;
         }

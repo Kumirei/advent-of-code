@@ -22,9 +22,9 @@ int main() {
     counts.fill(0);
 
     // Count occurances
-    for (int i = 0; i < data.size(); i++) {
+    for (string::size_type i = 0; i < data.size(); i++) {
         string line = data[i];
-        for (int j = 0; j < line.size(); j++) {
+        for (string::size_type j = 0; j < line.size(); j++) {
             int digit = line[j] - 48;  // 48=0 and 49=1
             counts[j] += digit > 0 ? 1 : -1;
         }

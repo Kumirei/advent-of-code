@@ -21,7 +21,7 @@ int main() {
     }
     // Iterate over data to create sliding window sums
     int sums[numbers.size() - 2];
-    for (int i = 2; i < numbers.size(); i++) {
+    for (string::size_type i = 2; i < numbers.size(); i++) {
         sums[i] = numbers[i - 2] + numbers[i - 1] + numbers[i];
     }
     // Iterate over sums to find count

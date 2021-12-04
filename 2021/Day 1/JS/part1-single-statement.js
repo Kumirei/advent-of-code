@@ -10,5 +10,9 @@ var c = file // c stands four count
 console.log(c)
 
 // Based on Gorbit99's solution
-c = file.split('\n').filter((n, i, arr) => i > 0 && arr[i - 1] < n).length + 1
+c = file.split('\n').filter((n, i, a) => i > 0 && a[i - 1] < n).length + 1
+console.log(c)
+
+// Gorbit99's better solution
+c = file.split('\n').filter((v, i, a) => +a[i - 1] < v).length
 console.log(c)

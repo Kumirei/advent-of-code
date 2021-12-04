@@ -9,7 +9,7 @@ int main() {
     // Read data into a vector
     vector<int> numbers;
     ifstream datafile;
-    datafile.open("data.txt");
+    datafile.open("../data.txt");
     if (datafile.is_open()) {
         string line;
         while (datafile.good()) {

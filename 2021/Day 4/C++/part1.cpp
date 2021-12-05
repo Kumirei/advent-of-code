@@ -152,7 +152,7 @@ intList toIntList(stringList list) {
     return newList;
 }
 
-// Read text file
+// Read text file to single string
 // Taken from https://stackoverflow.com/a/116220
 string readTextFile(string path) {
     ifstream file(path);

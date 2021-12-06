@@ -5,11 +5,15 @@ import path from 'path'
 type board = number[][]
 
 // Read data
-const numbersFile: string = fs.readFileSync(path.resolve(__dirname, '../data-numbers.txt'), 'utf8')
-const numbers: number[] = numbersFile.split(',').map((str) => Number(str))
-const boardsFile: string = fs.readFileSync(path.resolve(__dirname, '../data-boards.txt'), 'utf8')
-const boards: board[] = boardsFile
+const file: string = fs.readFileSync(path.resolve(__dirname, '../data.txt'), 'utf8')
+const numbers: number[] =
+    file
+        .match(/^[\d,]+/)?.[0]
+        .split(',')
+        .map((str) => parseInt(str)) || []
+const boards: board[] = file
     .split('\n\n')
+    .slice(1)
     .map((board) => board.split('\n').map((line) => line.split(/\s+/).map((str) => Number(str))))
 
 // Start calling numbers

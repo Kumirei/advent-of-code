@@ -48,15 +48,6 @@ int main() {
     }
     lines.push_back(line);
 
-    // Filter out diagonals
-    vector<Line> filteredLines;
-    for (Line line : lines) {
-        if (line.points[0][0] == line.points[1][0] || line.points[0][1] == line.points[1][1]) {
-            filteredLines.push_back(line);
-        }
-    }
-    lines = filteredLines;
-
     // Put line points into a map
     map<int, map<int, int>> traces;
     for (Line line : lines) {

@@ -20,7 +20,7 @@ for (let [start, end] of lines) {
         if (!traces[y][x]) traces[y][x] = 0
         traces[y][x]++
 
-        // If end is reached for either coordinate, in/de-crementing
+        // If end is reached for either coordinate, stop in/de-crementing
         if (x == end[0]) dx = 0
         if (y == end[1]) dy = 0
         x += dx

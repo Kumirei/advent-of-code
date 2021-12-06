@@ -6,7 +6,6 @@ const file: string = fs.readFileSync(path.resolve(__dirname, '../data.txt'), 'ut
 const lines: number[][][] = file
     .split('\n')
     .map((str) => str.split(' -> ').map((str) => str.split(',').map((str) => parseInt(str))))
-    .filter((line) => line[0][0] == line[1][0] || line[0][1] == line[1][1]) // filter out diagonals
 
 // Put line points into a record of coordinate
 let traces: Record<number, Record<number, number>> = {}

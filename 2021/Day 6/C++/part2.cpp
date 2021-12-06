@@ -1,11 +1,7 @@
 // Headers
-#include <algorithm>
 #include <array>
 #include <fstream>
 #include <iostream>
-#include <map>
-#include <sstream>
-#include <vector>
 
 // Namespaces
 using namespace std;  // Bad practice, I know
@@ -15,14 +11,14 @@ template <typename T, size_t N>
 T shiftArrayLeft(array<T, N> &v);
 
 // Constants
-const int numberOfDays = 80;
+const int numberOfDays = 256;
 
 // Main
 int main() {
     // Get input
     ifstream file("../data.txt");
-    int age;
-    array<int, 9> ages = {0, 0, 0, 0, 0, 0, 0, 0, 0};  // Age buckets
+    uint64_t age;
+    array<uint64_t, 9> ages = {0, 0, 0, 0, 0, 0, 0, 0, 0};  // Age buckets
     while (file >> age) {
         ages[age]++;
         file.ignore();
@@ -35,16 +31,18 @@ int main() {
     }
 
     // Count fishies
-    int fish = 0;
+    uint64_t fish = 0;
     for (auto num : ages) fish += num;
+
     cout << fish << " fishies after " << numberOfDays << " days " << endl;
+    // cout << numeric_limits<__uint128_t>::max() << endl;
 
     return 0;
 }
 
 template <typename T, size_t N>
 T shiftArrayLeft(array<T, N> &v) {
-    const int first = v[0];
+    const uint64_t first = v[0];
     for (size_t i = 0; i < N - 1; i++) {
         v[i] = v[i + 1];
     }

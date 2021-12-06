@@ -32,11 +32,11 @@ vector<int> slice(vector<int> v, int start, int end, int step = 1);
 bool contains(intList v, int val);
 
 // Classes
-class Board {
+class bingoCard {
    public:
     bool solved = false;
     board rows;
-    Board(board r) { rows = r; }
+    bingoCard(board r) { rows = r; }
     bool solve(intList called) {
         for (sizeInt i = 0; i < rows.size(); i++) {
             bool rowSolved = checkRow(called, rows[i]);
@@ -78,20 +78,20 @@ int main() {
     // Get boards
     string data = readTextFile("../test-data-boards.txt");
     dataList = split(data, "\n\n");
-    vector<Board> boards;
+    vector<bingoCard> boards;
     for (string b : dataList) {
         stringList rows = split(b, "\n");
         board newBoard;
         for (string row : rows) {
             newBoard.push_back(toIntList(split(row, regex{"\\s+"})));
         }
-        boards.push_back(Board(newBoard));
+        boards.push_back(bingoCard(newBoard));
     }
 
     // Start calling numbers
     for (sizeInt i = 1; i < numbers.size(); i++) {
         intList called = slice(numbers, 0, i);
-        for (Board b : boards) {
+        for (bingoCard b : boards) {
             b.solve(called);
             if (b.solved) {
                 cout << "Solution found" << endl;
@@ -115,7 +115,7 @@ bool contains(intList v, int val) { return find(v.begin(), v.end(), val) != v.en
 // Slice a vector into a subset
 vector<int> slice(vector<int> v, int start, int end, int step) {
     intList newVector;
-    for (sizeInt i = start; i < end && i < v.size(); i += step) {
+    for (int i = start; i < end; i += step) {
         newVector.push_back(v[i]);
     }
     return newVector;

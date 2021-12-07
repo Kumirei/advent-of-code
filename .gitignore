@@ -37,7 +37,7 @@
 *.app
 
 # Temp files
-tempCodeRunnerFile.cpp
+tempCodeRunnerFile*
 
 # Settings
 .vscode

@@ -1,69 +1,52 @@
 import fs from 'fs'
 import path from 'path'
 
-const file: string = fs.readFileSync(path.resolve(__dirname, '../test-data.txt'), 'utf8')
+const file: string = fs.readFileSync(path.resolve(__dirname, '../data.txt'), 'utf8')
 const lines = file.split('\n').map((line) => line.split(' | ').map((part) => part.split(' ')))
-
-const validNumbers = ['abcefg', 'cf', 'acdeg', 'acdfg', 'bcdf', 'abdfg', 'abdefg', 'acf', 'abcdefg', 'abcdfg']
-
-let map: { [key: string]: string } = {}
 const chars = 'abcdefg'
+const numbers = ['abcefg', 'cf', 'acdeg', 'acdfg', 'bcdf', 'abdfg', 'abdefg', 'acf', 'abcdefg', 'abcdfg']
 
-let results: number[] = []
-
-for (let line of lines) {
-    forPerms: for (let p of stringPermutations(chars)) {
-        for (let i = 0; i < 7; i++) map[p[i]] = chars[i]
-        for (let str of [...line[0], ...line[1]]) {
-            if (!validateNumber(map, str)) continue forPerms
-        }
-        let decoded = []
-        for (let str of [...line[0], ...line[1]]) {
-            decoded.push(String(validNumbers.indexOf(decodeStr(map, str))))
-        }
-        results.push(parseInt(decoded.slice(-4).join('')))
-
-        break
+// Solve line by line
+const values: number[] = []
+for (let [hint, problem] of lines) {
+    // Count the number of times each segment appears in the list of numbers 0-9
+    const charCounts: { [key: string]: number } = { a: 0, b: 0, c: 0, d: 0, e: 0, f: 0, g: 0 }
+    for (let str of hint) {
+        for (let char of str) charCounts[char]++
     }
-}
 
-console.log(
-    'Results',
-    results.reduce((sum, val) => sum + val, 0),
-)
+    // Create a key containing the translation
+    let key: { [key: string]: string } = {}
+    // Deduce from counts and numbers which character corresponds to each segment
+    key.b = Object.entries(charCounts).find((val) => val[1] == 6)?.[0] || '' // B is the only one with count 6
+    key.e = Object.entries(charCounts).find((val) => val[1] == 4)?.[0] || '' // E is the only one with count 4
+    key.f = Object.entries(charCounts).find((val) => val[1] == 9)?.[0] || '' // F is the only one with count 9
+    key.c = hint.find((val) => val.length == 2)?.replace(key.f, '') || '' // 1 consists of C and F, we know F
+    key.a = hint.find((val) => val.length == 3)?.replace(new RegExp(`[${key.c}${key.f}]`, 'g'), '') || '' // 7 consists of 1 and A, we know 1
+    key.d = hint.find((val) => val.length == 4)?.replace(new RegExp(`[${key.b}${key.c}${key.f}]`, 'g'), '') || '' // 4 consists of 1 and B, we know B
+    key.g = chars.split('').reduce((last, char) => (Object.values(key).includes(char) ? last : char)) // Last char available
 
-function decodeStr(map: { [key: string]: string }, str: string): string {
-    return str
-        .split('')
-        .map((s) => map[s])
-        .sort()
-        .join('')
-}
+    // Invert key for translation
+    key = Object.fromEntries(Object.entries(key).map(([a, b]) => [b, a]))
 
-function validateNumber(map: { [key: string]: string }, number: string) {
-    return validNumbers.includes(decodeStr(map, number))
-}
-
-function permutations(array: string[]): string[][] {
-    let permutations: string[][] = []
-    function getPermutations(array: string[], size: number) {
-        if (size == 1) permutations.push(array.slice())
-        for (let i = 0; i < size; i++) {
-            getPermutations(array, size - 1)
-            if (size % 2 == 1) swap(array, 0, size - 1)
-            else swap(array, i, size - 1)
-        }
+    // Translate numbers
+    const result = []
+    for (let str of problem) {
+        result.push(
+            String(
+                numbers.indexOf(
+                    str
+                        .split('')
+                        .map((s) => key[s])
+                        .sort()
+                        .join(''),
+                ),
+            ),
+        )
     }
-    getPermutations(array, array.length)
-    return permutations
+    values.push(parseInt(result.join('')))
 }
 
-function stringPermutations(str: string) {
-    return permutations(str.split('')).map((permutation) => permutation.join(''))
-}
-
-function swap(array: string[], n: number, m: number) {
-    let t = array[n]
-    array[n] = array[m]
-    array[m] = t
-}
+// Get solution
+const sum: number = values.reduce((sum, val) => sum + val, 0)
+console.log('Sum:', sum)

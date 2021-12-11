@@ -44,3 +44,7 @@ tempCodeRunnerFile*
 
 # JS
 node_modules
+
+# Don't ignore go.mod
+!go.mod
+!go.sum

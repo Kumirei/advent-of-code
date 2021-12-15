@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math"
 	"strings"
+	"time"
 )
 
 type Polymer map[string]int64
@@ -20,19 +21,24 @@ func main() {
 }
 
 func part1(data Task) {
-	pairs := initPairs(data.sequence)
-	pairs = polymerizer(pairs, data.rules, 10)
-	counts := countCharacters(pairs, data.sequence)
-	ans := diffMaxMin(counts)
-	fmt.Println("Part 1:", ans)
+	fmt.Println("Part 1")
+	solve(data, 10)
+	fmt.Println()
 }
 
 func part2(data Task) {
+	fmt.Println("Part 2")
+	solve(data, 40)
+}
+
+func solve(data Task, steps int) {
+	t := time.Now()
 	pairs := initPairs(data.sequence)
-	pairs = polymerizer(pairs, data.rules, 40)
+	pairs = polymerizer(pairs, data.rules, steps)
 	counts := countCharacters(pairs, data.sequence)
 	ans := diffMaxMin(counts)
-	fmt.Println("Part 2:", ans)
+	fmt.Println("Answer:", ans)
+	fmt.Println("Time:  ", time.Now().Sub(t))
 }
 
 func diffMaxMin(counts Polymer) int64 {

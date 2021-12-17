@@ -1,7 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 
-const file: string = fs.readFileSync(path.resolve(__dirname, '../sample.txt'), 'utf-8')
+const file: string = fs.readFileSync(path.resolve(__dirname, '../data.txt'), 'utf-8')
 const bounds = file.split(',').map((x) =>
     x
         .split('=')[1]

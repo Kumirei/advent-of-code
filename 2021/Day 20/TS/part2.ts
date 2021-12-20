@@ -30,7 +30,7 @@ for (let i = 0; i < parts[1].length; i++) {
     }
 }
 
-image = enhancer(image, algo, 2)
+image = enhancer(image, algo, 50)
 console.log('Number of lit pixels:', image.size)
 
 // Prints the image

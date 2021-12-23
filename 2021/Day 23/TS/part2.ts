@@ -81,6 +81,7 @@ function search(cache: Record<string, number>, state: State, lowestCost: number,
     return lowestCost
 }
 
+// Print the current state
 function printState(state: State) {
     const h = state.hall.map((a) => a || '.')
     const [r1, r2, r3, r4] = state.rooms
@@ -91,10 +92,12 @@ function printState(state: State) {
     console.log(`  #########  \n`)
 }
 
+// Copy the state
 function copyState(state: State): State {
     return { hall: state.hall.slice(), rooms: [...state.rooms.map((room) => room.slice())] }
 }
 
+// Is the game in a completed state
 function isWin(state: State) {
     return state.rooms.every((room, i) => room.every((pod) => pod == i + 1))
 }
@@ -104,6 +107,7 @@ function roomReady(room: Room, type: Pod) {
     return room.every((pod) => pod == type || pod == 0)
 }
 
+// Get data
 function getInput(): State {
     const file: string = fs.readFileSync(path.resolve(__dirname, '../data2.txt'), 'utf-8')
     const startPos = file

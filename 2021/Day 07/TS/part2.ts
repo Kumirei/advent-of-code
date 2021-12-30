@@ -1,12 +1,17 @@
 import fs from 'fs'
 import path from 'path'
 
-const file: string = fs.readFileSync(path.resolve(__dirname, '../test-data.txt'), 'utf8')
+const file: string = fs.readFileSync(path.resolve(__dirname, '../data.txt'), 'utf8')
 const positions = file.split(',').map((str) => parseInt(str))
 
 // Find average, then try both values near it
 const target1 = Math.floor(positions.reduce((sum, val) => sum + val, 0) / positions.length)
 const targets = [target1, target1 + 1]
+console.log(
+    positions.reduce((sum, val) => sum + val, 0),
+    positions.length,
+)
+
 let fuel = targets
     .map((target) =>
         // Get fuel consumption for each possible value

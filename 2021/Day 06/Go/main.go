@@ -13,12 +13,12 @@ type Task struct {
 
 func main() {
 	part1(getData("06", false), 80)
-	part1(getData("06", false), 256)
+	part2(getData("06", false), 256)
 }
 
 func part1(data Task, steps int) {
 	for i := 0; i < steps; i++ {
-		data.fishes[8] = popFirst(data.fishes)
+		data.fishes[8] = goutils.PopFirst(&data.fishes, true)
 		data.fishes[6] += data.fishes[8]
 	}
 	var sum int = 0
@@ -28,11 +28,8 @@ func part1(data Task, steps int) {
 	fmt.Println("Fishes after", steps, "iterations:", sum)
 }
 
-func popFirst(arr []int) int {
-	first := arr[0]
-	copy(arr, arr[1:])
-	arr = arr[:len(arr)-1]
-	return first
+func part2(data Task, steps int) {
+	part1(data, steps)
 }
 
 func getData(day string, sample bool) Task {

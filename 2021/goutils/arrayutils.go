@@ -18,3 +18,12 @@ func ArrayMax(arr []int) int {
 	}
 	return max
 }
+
+func PopFirst(arr *[]int, keepLength bool) int {
+	first := (*arr)[0]
+	copy(*arr, (*arr)[1:])
+	if !keepLength {
+		*arr = (*arr)[:len(*arr)-1]
+	}
+	return first
+}

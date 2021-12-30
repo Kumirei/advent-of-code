@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import path from 'path'
 
 // Read data
-const file: string = fs.readFileSync(path.resolve(__dirname, '../test-data.txt'), 'utf8')
+const file: string = fs.readFileSync(path.resolve(__dirname, '../data.txt'), 'utf8')
 const startTimes: number[] = file.split(',').map((str) => parseInt(str))
 
 // Fish ages
@@ -16,8 +16,6 @@ for (let i = 0; i < 256; i++) {
 }
 
 // Count number of fish
-console.log(ages)
-
 const fish = ages.reduce((sum, val) => sum + val)
 
 console.log(fish)

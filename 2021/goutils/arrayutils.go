@@ -19,6 +19,14 @@ func ArrayMax(arr []int) int {
 	return max
 }
 
+func ArrayProd(arr []int) int {
+	prod := 1
+	for _, v := range arr {
+		prod *= v
+	}
+	return prod
+}
+
 func PopFirst(arr *[]int, keepLength bool) int {
 	first := (*arr)[0]
 	copy(*arr, (*arr)[1:])

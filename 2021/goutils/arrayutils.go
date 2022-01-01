@@ -27,6 +27,12 @@ func ArrayProd(arr []int) int {
 	return prod
 }
 
+func Pop(arr *[]int) int {
+	last := (*arr)[len((*arr))-1]
+	*arr = (*arr)[:len(*arr)-1]
+	return last
+}
+
 func PopFirst(arr *[]int, keepLength bool) int {
 	first := (*arr)[0]
 	copy(*arr, (*arr)[1:])

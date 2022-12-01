@@ -1,4 +1,4 @@
-# 2022 Advent Of Code solutionswhite_check_mark
+# 2022 Advent Of Code solutions
 
 ## Rust (absolute beginner)
 

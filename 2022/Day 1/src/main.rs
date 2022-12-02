@@ -20,7 +20,6 @@ fn main() {
     }
 
     // Find largest sum
-    println!("Elves {:?}", elves);
     let mut largest = 0;
     for elf in elves.iter() {
         let mut sum = 0;
@@ -33,5 +32,12 @@ fn main() {
     }
 
     println!("Largest sum: {}", largest);
+
+    // Find three largest sums
+    let mut sums = elves.iter().map(|x| x.iter().sum::<i32>()).collect::<Vec<i32>>();
+    // let sorted = sums.sort();
+    sums.sort_by(|a, b| b.cmp(a));
+
+    println!("Three largest sums: {}", sums.iter().take(3).sum::<i32>());
 
 }

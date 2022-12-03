@@ -48,3 +48,6 @@ node_modules
 # Don't ignore go.mod
 !go.mod
 !go.sum
+
+# Ignore rust logs
+**/target
